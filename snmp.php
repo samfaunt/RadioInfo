@@ -4,6 +4,7 @@ $stationnamesnmp = snmpwalk("10.106.8.1", "public", ".1.3.6.1.4.1.41112.1.4.7.1.
 $signalsnmp = snmpwalk("10.106.8.1", "public", ".1.3.6.1.4.1.41112.1.4.7.1.3");
 $stationmacsnmp = snmpwalk("10.106.8.1","public",".1.3.6.1.4.1.41112.1.4.7.1.1");
 $stationTxRate = snmpwalk("10.106.8.1", "public",".1.3.6.1.4.1.41112.1.4.7.1.17");
+$stationDeviceType = snmpwalk("10.106.8.1", "public","1.36.164.60.212.81.3");
 
 
 
@@ -49,7 +50,7 @@ foreach ($stationmacsnmp as $value){
 	echo  $stationname[$key] .  " // Signal:" . $signal[$key] . " // "." Mac Address: " . $stationmac[$key] ."\n";
 }*/
 
-var_dump($stationTxRate);
+var_dump($stationDeviceType);
 
 
 
