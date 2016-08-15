@@ -37,7 +37,33 @@ function stations($ip, $username, $password) {
 
 }
 
+function sizeFilter( $bytes )
+{
+    $label = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB' );
+    for( $i = 0; $bytes >= 1024 && $i < ( count( $label ) -1 ); $bytes /= 1024, $i++ );
+    return( round( $bytes, 2 ));
+}
+function clientInfo($ipaddress,$username,$password)
+{
+    $clients = stations($ipaddress, $username, $password);
 
-$clients = stations("10.106.8.1","ubnt","password");
+    foreach ($clients as $i => $client) {
+        $clientname = $clients[$i]->remote->hostname;
+        $signal = $clients[$i]->remote->signal;
+        $devicetype = $clients[$i]->remote->platform;
+        $firmware = $clients[$i]->remote->version;
+        $uplinkcapacity = $clients[$i]->airmax->uplink_capacity;
+        $uplinkcapacity = sizeFilter($uplinkcapacity);
+        $downlinkcapacity = $clients[$i]->airmax->downlink_capacity;
+        $downlinkcapacity = sizeFilter($downlinkcapacity);
 
-echo $clients->remote;
+        $apclients[$i] = array
+        (
+            array($clientname, $signal, $devicetype, $firmware, $uplinkcapacity, $downlinkcapacity)
+
+        );
+    }
+
+
+}
+
