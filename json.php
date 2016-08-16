@@ -62,6 +62,8 @@ function clientInfo($ipaddress,$username,$password)
             array($clientname, $signal, $devicetype, $firmware, $uplinkcapacity, $downlinkcapacity)
 
         );
+
+        return $apclients;
     }
 
 
